@@ -12,6 +12,7 @@ EXPOSE 8888
 
 # sets the default working directory
 # this is also specified in the compose file
+# adding test comment to trigger rebuild
 WORKDIR /workplace
 
 # run JupyterLab on container start
