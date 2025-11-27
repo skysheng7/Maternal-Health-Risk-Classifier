@@ -19,6 +19,12 @@ https://github.com/GloriaYi/Maternal-Health-Risk-Classifier/blob/b950e2f3587a742
 
 ## Usage
 
+### Setup
+
+> If you are using Windows or Mac, make sure Docker Desktop is running.
+
+1. Clone this GitHub repository.
+
 First time running the project, run the following from the root of this repository:
 
 ``` bash
