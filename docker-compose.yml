@@ -1,9 +1,6 @@
 services:
   dockerlock:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: dockerlock
+    image: gloriayi/maternal-health-risk-classifier:latest
     container_name: dockerlock
     ports:
       - "8886:8888"
