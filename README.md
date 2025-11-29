@@ -52,11 +52,7 @@ make stop
 
 ### Developer dependencies
 
-- `conda`
-- `conda-lock`
-- `jupyterlab` (version 4.5.0 or higher)
-- `nb_conda_kernels`
-- Python and packages listed in [`environment.yml`](environment.yml)
+- [Docker](https://www.docker.com/) 
 
 ### Adding a new dependency
 
