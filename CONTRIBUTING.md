@@ -22,6 +22,7 @@ cd Maternal-Health-Risk-Classifier
 
 #### Docker Setup
 
+For more information about the project dependencies and environment, see [README.md](README.md).
 If you are using Windows or Mac, make sure Docker Desktop is running.
 
 Start the Docker container by running:
