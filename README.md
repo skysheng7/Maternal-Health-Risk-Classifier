@@ -35,17 +35,42 @@ make up
 
 2. Browse to this url: http://localhost:8886/
 
-3. To run the data analysis, run the following from the root of this repository:
-Open `notebooks/health_analysis.ipynb` in Jupyter Lab you just launhed and under the "Kernel" menu click "Restart Kernel and Run All Cells..."
+3. To run the analysis, open a terminal and run the following commands:
+
+```
+python scripts/download_data.py \
+    --url="https://archive.ics.uci.edu/static/public/863/maternal+health+risk.zip" \
+    --write-to=data/raw
+
+python scripts/validate_data.py \
+    --raw-data="data/raw/Maternal Health Risk Data Set.csv" \
+    --data-to=data/processed \
+    --log-to=results/logs
+
+python scripts/split_preprocess_data.py \
+    --validated-data=data/processed/validated_data.csv \
+    --data-to=data/processed \
+    --preprocessor-to=results/models
+
+python scripts/fit_maternal_health_risk_classifier.py \
+    --training-data=data/processed/maternal_health_risk_train.csv \
+    --pipeline-to=results/models \
+    --plot-to=results/figures \
+    --seed=522
+```
 
 ### Clean up
 
-1. To shut down the container and clean up the resources, 
-type `Cntrl` + `C` in the terminal
-where you launched the container, and enter the following command:
+1. To shut down the container and clean up the resources, enter the following command to stop the Docker compose services:
 
 ``` 
 make stop
+```
+
+2. Enter the following command to stop the Docker compose services:
+
+``` 
+make remove
 ```
 
 ## Developer notes
@@ -56,11 +81,11 @@ make stop
 
 ### Adding a new dependency
 
-1. Add the dependency to the `environment.yml` file on a new branch.
+1. Add the dependency to the `environment.yml` file on a new branch. If you have installed the package into the environment, make sure you are in the environment `health_analysis_env` and run `conda env export --from-history | grep -v "^prefix" > environment.yml` to export the environment automatically.
 
 2. Run `python utils/update_enviroment_yml.py --root_dir="." --env_name="health_analysis_env" --yml_name="environment.yml"` to append the version numbers of the packages.
    
-3. Run `conda-lock -f environment.yml -p osx-arm64 -p osx-64 -p linux-aarch64 -p linux-64 -p win-64` to update the `conda-lock.yml` file.
+3. Run `conda-lock -f environment.yml -p osx-arm64 -p osx-64 -p linux-64 -p win-64` to update the `conda-lock.yml` file.
 
 4. Re-build the Docker image locally to ensure it builds and runs properly.
 
