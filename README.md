@@ -71,8 +71,7 @@ python scripts/evaluate_maternal_health_risk_classifier.py \
     --results-to=results/tables \
     --seed=123
 
-quarto render report/health_analysis.qmd --to html
-quarto render report/health_analysis.qmd --to pdf
+quarto render reports/health_analysis.qmd --to html
 ```
 
 ### Clean up
