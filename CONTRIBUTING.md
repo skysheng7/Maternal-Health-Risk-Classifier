@@ -45,24 +45,52 @@ python scripts/validate_data.py \
     --data-to=data/processed \
     --log-to=results/logs
 
+# With default parameters (test_size=0.3, random_state=123)
 python scripts/split_preprocess_data.py \
     --validated-data=data/processed/validated_data.csv \
     --data-to=data/processed \
     --preprocessor-to=results/models
+
+# With custom parameters
+python scripts/split_preprocess_data.py \
+    --validated-data=data/processed/validated_data.csv \
+    --data-to=data/processed \
+    --preprocessor-to=results/models \
+    --test-size=0.2 \
+    --random-state=522
+
+python scripts/eda.py \
+    --processed-training-data=data/processed/maternal_health_risk_train.csv \
+    --plot-to=results/eda/figures \
+    --tables-to=results/tables
 
 python scripts/fit_maternal_health_risk_classifier.py \
     --training-data=data/processed/maternal_health_risk_train.csv \
     --pipeline-to=results/models \
     --plot-to=results/figures \
     --seed=522
+
+python scripts/evaluate_maternal_health_risk_classifier.py \
+    --processed-test-data=data/processed/maternal_health_risk_test.csv \
+    --pipeline-from=results/models/maternal_risk_classfier.pickle \
+    --results-to=results/tables \
+    --seed=522
 ```
 
 #### Clean Up
 
-To shut down the container and clean up the resources, type `Ctrl` + `C` in the terminal where you launched the container, and then run:
+To shut down the container and clean up the resources, run the following commands:
+
+Stop the Docker compose services:
 
 ``` bash
 make stop
+```
+
+Remove the containers and associated resources:
+
+``` bash
+make remove
 ```
 
 ### Creating a Branch
