@@ -26,16 +26,16 @@ The report can be found [here](https://github.com/GloriaYi/Maternal-Health-Risk-
 
 1. Clone this GitHub repository.
 
-1. Navigate to the root of this project on your computer using the
+2. Navigate to the root of this project on your computer using the
    command line and enter the following command:
 
 ``` 
 make up
 ```
 
-2. Browse to this url: http://localhost:8886/
+3. Browse to this url: http://localhost:8886/
 
-3. To run the analysis, open a terminal and run the following commands:
+4. To run the analysis, open a terminal and run the following commands:
 
 ```
 python scripts/download_data.py \
@@ -47,10 +47,19 @@ python scripts/validate_data.py \
     --data-to=data/processed \
     --log-to=results/logs
 
+# With default parameters (test_size=0.3, random_state=123)
 python scripts/split_preprocess_data.py \
     --validated-data=data/processed/validated_data.csv \
     --data-to=data/processed \
     --preprocessor-to=results/models
+
+# With custom parameters
+python scripts/split_preprocess_data.py \
+    --validated-data=data/processed/validated_data.csv \
+    --data-to=data/processed \
+    --preprocessor-to=results/models \
+    --test-size=0.2 \
+    --random-state=522
 
 python scripts/eda.py \
     --processed-training-data=data/processed/maternal_health_risk_train.csv \

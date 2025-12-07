@@ -33,7 +33,29 @@ make up
 
 This will build and launch the Jupyter Lab environment. Browse to http://localhost:8886/ to access Jupyter Lab.
 
-To run the data analysis, open `notebooks/health_analysis.ipynb` in Jupyter Lab and under the "Kernel" menu click "Restart Kernel and Run All Cells..."
+To run the data analysis, open a terminal and run the following commands:
+
+```
+python scripts/download_data.py \
+    --url="https://archive.ics.uci.edu/static/public/863/maternal+health+risk.zip" \
+    --write-to=data/raw
+
+python scripts/validate_data.py \
+    --raw-data="data/raw/Maternal Health Risk Data Set.csv" \
+    --data-to=data/processed \
+    --log-to=results/logs
+
+python scripts/split_preprocess_data.py \
+    --validated-data=data/processed/validated_data.csv \
+    --data-to=data/processed \
+    --preprocessor-to=results/models
+
+python scripts/fit_maternal_health_risk_classifier.py \
+    --training-data=data/processed/maternal_health_risk_train.csv \
+    --pipeline-to=results/models \
+    --plot-to=results/figures \
+    --seed=522
+```
 
 #### Clean Up
 
