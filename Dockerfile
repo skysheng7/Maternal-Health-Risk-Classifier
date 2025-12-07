@@ -7,7 +7,11 @@ COPY conda-lock.yml conda-lock.yml
 RUN conda install -n base -c conda-forge conda-lock -y
 RUN conda-lock install -n dockerlock conda-lock.yml
 RUN conda run -n dockerlock pip install deepchecks==0.19.1
-RUN apt update && apt install -y lmodern
+USER root
+
+# install lmodern for Quarto PDF rendering
+RUN sudo apt update \
+    && sudo apt install -y lmodern
 
 # expose JupyterLab port
 EXPOSE 8888
